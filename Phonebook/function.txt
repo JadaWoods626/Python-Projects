@@ -1,0 +1,85 @@
+import os
+from tkinter import *
+import tkinter as tk
+import sqlite3
+
+import main
+import gui
+
+def center_window(self,w, h):
+    screen_width = self.master.winfo_screenwidth()
+    screen_height = self.master.winfo_screenheight()
+    x = int((screen_width/2) - (w/2))
+    y = int((screen_height/2) - (h/2))
+    centerGeo = self.master.geometry('{}x{}+{}+{}'.format(w, h, x, y))
+    return centerGeo
+
+def ask_quit(self):
+    if messagebox.askokcancel("Exit program", "Okay to exit application"):
+        self.master.destroy()
+        os_exit(0)
+
+def create_db
+(self):
+    conn = sqlite3.connect('phonebook.db')
+    with conn:
+    cur = conn.cursor()
+    cur.execute("CREATE TABLE IF NOT EXISTS tbl_phonebook( \
+        ID INTEGER PRIMARY KEY AUTOINCREMENT, \
+        col_fname TEXT, \
+        col_lname TEXT, \
+        col_fullname TEXT, \
+        col_phone TEXT, \
+        col_email TEXT \
+        )")
+
+    conn.commit()
+conn.close()
+first_run(self)
+
+def first_run(self):
+    data = ('Mori','Dan','Mori Dan','123-456-7890','moridan@outlook.com')
+    conn = sqlite3.connect('phonebook.db')
+    with conn:
+        cur = conn.cursor()
+        our,count = count_records(our)
+        if count < 1:
+            our.execute(""""INSERT INTO tbl_phonebook (col_fname, col_lname,col_fullname col_phone, col,_email) Values (?, ?, ?, ?, ?)"""", data
+            conn.commit()
+     conn.close()
+
+def count_records(cur):
+    count = ""
+    cur.execute("""SELECT COUNT(*) FROM tbl-phonebook""")
+    count = fetchone()[0]
+    return cur,count
+
+def onSelect(self,event):
+    varList = event.widget
+    select = varList.curselection()[0]
+    value = varList.get(select)
+    conn = sqlite3.connect('phonebook.db')
+    with conn:
+        cursor = conn.cursor()
+        cursor.execute("""SELECT col-fname, col_lname, col_phone, col,_email FROM tbl_phonebook where col_fullname = (?)""", [value])
+        varBody = cursor.fetchall()
+        for data in varBody:
+            self.txt_fname.delete(0,END)
+            self.txt_fname.insert(0,data[0])
+            self.txt_lname.delete(0,END)
+            self.txt_lname.insert(0,data[1])
+            self.txt_phone.delete(0,END)
+            self.txt_phone.insert(0,data[2])
+            self.txt_email.delete(0,END)
+            self.txt_email.insert(0,data[3])
+
+def addToList(self):
+    var_fname = self.txt_fname.get()
+    var_lname = self.txt_lname.get()
+    var_fname var_fname.strip()
+    var_lname var_fname.strip()
+    var_lname var_fname.title()
+    var_lname var_fname.title()
+    var_fulname = ("{} {}".format(var_fname,var_lname))
+    print("var_fullname: {}".format:(var_fullname))
+    
