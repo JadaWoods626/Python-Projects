@@ -1,5 +1,12 @@
 class Protected:
     def __init__(self):
+        self._protectedVar = 0
+        obj = Protected()
+        obj._protectedVar = 22
+        print(obj._protectedVar)
+
+        class Protected:
+    def __init__(self):
         self._privateVar = 822
 
 def getPrivate(self):
@@ -8,12 +15,8 @@ def getPrivate(self):
 def setPrivate(self, private):
     self._privateVar = private
 
-obj = Protected()
-obj.getPrivate()
-obj.setPrivate(2000)
-obj.getPrivate()
+    obj = Protected()
+    obj.getPrivate()
+    obj.setPrivate(2000)
+    obj.getPrivate()
 #since we set the private to 822 and 2000 it can not be changed unless it is on purpose
-    
-
-
-                
