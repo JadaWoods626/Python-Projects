@@ -2,6 +2,9 @@ from abc import ABC, abstractmethod
 
 class car(ABC):
 	def paySlip(self,amount):
+		print("Your purchase amount: ",amount)
+	@abstractmethod
+	def payment(self,amount):
 		pass
 
 class DebitCardPayment(car):

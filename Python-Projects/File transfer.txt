@@ -34,6 +34,11 @@ class ParentWindow(Frame):
         source = self.source_dir.get()
         destination = self.destination_dir.get()
         source_files = os.listdir(source)
+        from datatime import timedelta
+        day = timedelta(hours=24)
+        another_day = timedelta(hours=12, minutes=720)
+        day == another_day
+        day.total_minutes
         for i in source_files:
             shutil.move(source + '/' + i, destination)
             print(i + ' was successfully transferred.')
@@ -50,3 +55,4 @@ if __name__ == "__main__":
     root =tk.Tk()
     App = ParentWindow(root)
     root.mainloop()
+
