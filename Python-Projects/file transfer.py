@@ -7,51 +7,48 @@ import shutil
 class ParentWindow(Frame):
     def __init__(self, master):
         Frame.__init__(self)
+#create button to select files from source directory
+        self.sourceDir_btn = Button(text="Select Source", width=20, command=self.sourceDir)
+        self.sourceDir_btn.grid(row=0, column=0, padx=(20, 10), pady=(30, 0))
+        self.destDir_btn = Button(text="Select Destination", width=20, command=self.destDir)
+        self.destDir_btn.grid(row=1, column=0, padx=(20, 10), pady=(15, 10))
+#creates button to fransfer files
+        self.transfer_btn = Button(text="Transfer Files", width=20, command=self.transferFiles)
+        self.transfer_btn.grid(row=2, column=1, padx=(200, 0), pady=(0, 15))
+#creates entry for source directory selection
+        self.source_dir = Entry(width=75)
+        self.source_dir.grid(row=0, column=1, columnspan=2, padx=(20, 10), pady=(30, 0))
+        self.destination_dir = Entry(width=75)
+        self.destination_dir.grid(row=1, column=1, columnspan=2, padx=(20, 10), pady=(15, 10))
+#creates button to exit       
+        self.exit_btn = Button(text="Exit", width=20, command=self.exitProgram)
+        self.exit_btn.grid(row=2, column=2, padx=(10, 40), pady=(0, 15))        
 #sets title of GUI
         self.master.title("File Transfer")
     def sourceDir(self):
         selectSourceDir = tkinter.filedialog.askdirectory()
         self.source_dir.delete(0, END)
         self.source_dir.insert(0, selectSourceDir)
-#create button to select files from source directory
-        self.sourceDir_btn = Button(text="Select Source", width=20, command=self.sourceDir)
-        self.sourceDir_btn.grid(row=0, column=0, padx=(20, 10), pady=(30, 0))
+
         
     def destDir(self):
         selectDestDir= tkinter.filedialog.askdirectory()
         self.destination_dir.delete(0, END)
         self.destination_dir.insert(0, selectDestDir)
-#creates entry for source directory selection
-        self.source_dir = Entry(width=75)
-        self.source_dir.grid(row=0, column=1, columnspan=2, padx=(20, 10), pady=(30, 0))
 
-        self.destDir_btn = Button(text="Select Destination", width=20, command=self.destDir)
-        self.destDir_btn.grid(row=1, column=0, padx=(20, 10), pady=(15, 10))
-        self.destination_dir = Entry(width=75)
-        self.destination_dir.grid(row=1, column=1, columnspan=2, padx=(20, 10), pady=(15, 10))
-        
     def transferFiles(self):
         source = self.source_dir.get()
-        destination = self.destination_dir.get()
+        destination = self.destination_dir.get(os.path.getmtime())
         source_files = os.listdir(source)
-        from datatime import timedelta
-        day = timedelta(hours=24)
-        another_day = timedelta(hours=12, minutes=720)
-        day == another_day
-        day.total_minutes
         for i in source_files:
             shutil.move(source + '/' + i, destination)
             print(i + ' was successfully transferred.')
-#creates button to fransfer files
-        self.trandfer_btn = Button(text="Transfer Files", width=20, command=self.transferFiles)
-        self.transfer_btn.grid(row=2, column=1, padx=(200, 0), pady=(0, 15))
-        
-def exit_program(self):
-    root.destroy()
-    self.exit_btn = Button(text="Exit", width=20, commad=self.exit_program)
-    slef.exit_btn.grid(row=2, column=2, padx=(10, 40), pady=(0, 15))
+
+    def exitProgram(self):
+        root.destroy()
+
     
 if __name__ == "__main__":
-    root =tk.Tk()
+    root = tk.Tk()
     App = ParentWindow(root)
     root.mainloop()
