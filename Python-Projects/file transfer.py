@@ -44,9 +44,9 @@ class ParentWindow(Frame):
         source = self.source_dir.get()
         destination = self.destination_dir.get()
         source_files = os.listdir(source)
-        for i in source_files:
-            shutil.move(source + '/' + i, destination)
-            print(i + ' was successfully transferred.')
+        for i in source_files
+        timestamp = time.strftime('%m/%d/%Y :: %H:%M/%S', time.gmtime(os.path.getmtime(newPath)))
+        datetimeObj = datetime.strptime(timestamp, '%m/%d/%Y :: %H:%M/%S')
 
     def exitProgram(self):
         root.destroy()
