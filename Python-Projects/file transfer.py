@@ -3,6 +3,8 @@ from tkinter import *
 import tkinter.filedialog
 import os
 import shutil
+import time
+from datetime import timedelta, datetime
 
 class ParentWindow(Frame):
     def __init__(self, master):
@@ -43,11 +45,15 @@ class ParentWindow(Frame):
     def transferFiles(self):
         source = self.source_dir.get()
         destination = self.destination_dir.get()
-        source_files = os.listdir(source)
-        for i in source_files
-        timestamp = time.strftime('%m/%d/%Y :: %H:%M/%S', time.gmtime(os.path.getmtime(newPath)))
-        datetimeObj = datetime.strptime(timestamp, '%m/%d/%Y :: %H:%M/%S')
+        source_files = os.listdir(source_files)
+        for i in source_files:
+            src = self.source + '/' + i
+            timestamp = time.strftime('%m/%d/%Y :: %H:%M/%S', time.gmtime(os.path.getmtime(src)))
+            datetimeObj = datetime.strptime(timestamp, '%m/%d/%Y :: %H:%M/%S')
 
+            if datetimeObj >= datetime.today() - timedelta(days = 1):
+                shutil.copy(src, self.destination)
+            
     def exitProgram(self):
         root.destroy()
 
