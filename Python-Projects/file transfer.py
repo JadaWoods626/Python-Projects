@@ -45,14 +45,19 @@ class ParentWindow(Frame):
     def transferFiles(self):
         source = self.source_dir.get()
         destination = self.destination_dir.get()
-        source_files = os.listdir(source_files)
+        source_files = os.listdir(source)
         for i in source_files:
-            src = self.source + '/' + i
-            timestamp = time.strftime('%m/%d/%Y :: %H:%M/%S', time.gmtime(os.path.getmtime(src)))
-            datetimeObj = datetime.strptime(timestamp, '%m/%d/%Y :: %H:%M/%S')
+            src = source + '/' + i
+            modtime = os.path.getmtime(src)
+            newmodtime = datetime.fromtimestamp(modtime)
+            todaydate = datetime.today()
+            newtime = todaydate - timedelta(hours = 24)
+            #timestamp = time.strftime('%m/%d/%Y :: %H:%M/%S', time.gmtime(os.path.getmtime(src)))
+            #datetimeObj = datetime.strptime(timestamp, '%m/%d/%Y :: %H:%M/%S')
 
-            if datetimeObj >= datetime.today() - timedelta(days = 1):
-                shutil.copy(src, self.destination)
+            if newmodtime > newtime:
+                shutil.move(source + '/' + i, destination)
+                print(i + ' was successfully transfered.')
             
     def exitProgram(self):
         root.destroy()
