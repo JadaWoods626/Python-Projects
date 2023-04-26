@@ -40,3 +40,17 @@ with conn:
     for item in varPerson:
         msg = "First Name: {}\nLast Name: {}\nEmail: {}".format(item[0], item[1], item[2])
     print(msg)
+
+
+
+ cur.execute("INSERT INTO tbl_assignment223 (col_png, col_txt, col_docx, col_jpg, col_mpg) VALUES (?, ?, ?, ?, ?)", \
+        ('NULL', 'World.txt', 'NULL', 'NULL', 'NULL'))
+
+conn = sqlite3.connect('test9.db')
+with conn:
+    cur = conn.cursor()
+    cur.execute("SELECT col_txt FROM tbl_assignment223 WHERE col_txt = 'World.txt'")
+    varText = cur.fetchall()
+    for item in varText:
+        msg = "Text File: {}".format(item)
+    print(msg)
